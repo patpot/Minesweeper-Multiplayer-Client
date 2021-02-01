@@ -16,6 +16,7 @@ public class Client : MonoBehaviour
     public int MyId = 0;
     public TCP Tcp;
 
+    private bool _isConnected = false;
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> _packetHandlers;
     private void Awake()
@@ -36,9 +37,16 @@ public class Client : MonoBehaviour
         Tcp = new TCP();
     }
 
+    private void OnApplicationQuit()
+    {
+        _disconnect();
+    }
+
     public void ConnectToServer()
     {
         InitalizeClientData();
+
+        _isConnected = true;
         Tcp.Connect();
     }
 
@@ -97,7 +105,7 @@ public class Client : MonoBehaviour
                 int _byteLength = _stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
-
+                    Instance._disconnect();
                     return;
                 }
 
@@ -110,7 +118,7 @@ public class Client : MonoBehaviour
             catch (Exception _ex)
             {
                 Debug.Log($"Error receiving TCP data: {_ex}");
-
+                Disconnect();
             }
         }
         private bool HandleData(byte[] _data)
@@ -157,6 +165,16 @@ public class Client : MonoBehaviour
 
             return false;
         }
+
+        public void Disconnect()
+        {
+            Instance._disconnect();
+
+            _stream = null;
+            _receivedData = null;
+            _receiveBuffer = null;
+            Socket = null;
+        }
     }
 
     private void InitalizeClientData()
@@ -167,8 +185,18 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.SPAWN_PLAYER, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.START_GAME, ClientHandle.StartGame },
             { (int)ServerPackets.SEND_REVEAL_TILE, ClientHandle.RevealTile },
-            { (int)ServerPackets.SEND_FLAG, ClientHandle.ReceiveFlag }
+            { (int)ServerPackets.SEND_FLAG, ClientHandle.ReceiveFlag },
+            { (int)ServerPackets.CLIENT_DISCONNECT, ClientHandle.ReceiveDisconnect }
         };
         Debug.Log("Initialized packets.");
+    }
+
+    private void _disconnect()
+    {
+        if (_isConnected)
+        {
+            _isConnected = false;
+            Tcp.Socket.Close();
+        }
     }
 }

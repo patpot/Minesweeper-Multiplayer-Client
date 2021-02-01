@@ -63,4 +63,18 @@ public class ClientHandle : MonoBehaviour
         else
             GameManager.Boards[id].FlagNumber.text = (int.Parse(GameManager.Boards[id].FlagNumber.text) + 1).ToString();
     }
+
+    public static void ReceiveDisconnect(Packet _packet)
+    {
+        int id = _packet.ReadInt();
+
+        // The other player disconnected, pseudo end the game
+        // TODO: make this proper
+        foreach (var board in GameManager.Boards)
+            Destroy(board.Value.gameObject);
+        GameManager.Boards.Clear();
+        //Other client has already disconnected, this one needs to as well
+        Client.Instance.Tcp.Disconnect();
+        UIManager.Instance.ReturnToMenu();
+    }
 }

@@ -29,4 +29,11 @@ public class UIManager : MonoBehaviour
         UsernameField.interactable = false;
         Client.Instance.ConnectToServer();
     }
+
+    public void ReturnToMenu()
+    {
+        StartMenu.SetActive(true);
+        UsernameField.interactable = true;
+        UsernameField.text = "";
+    }
 }
