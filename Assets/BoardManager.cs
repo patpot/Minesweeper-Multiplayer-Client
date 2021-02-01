@@ -68,7 +68,6 @@ public class BoardManager : MonoBehaviour
     {
         Unrevealed,
         Revealed,
-        Mine,
         Flag
     }
 }
