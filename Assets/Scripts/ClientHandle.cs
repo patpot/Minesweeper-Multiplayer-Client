@@ -73,11 +73,32 @@ public class ClientHandle : MonoBehaviour
 
         // The other player disconnected, pseudo end the game
         // TODO: make this proper
-        foreach (var board in GameManager.Boards)
-            Destroy(board.Value.gameObject);
-        GameManager.Boards.Clear();
         //Other client has already disconnected, this one needs to as well
         Client.Instance.Tcp.Disconnect();
-        UIManager.Instance.ReturnToMenu();
+    }
+
+    public static void PlayerHitMine(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        bool _gameOver = _packet.ReadBool();
+
+        if (_id == Client.Instance.MyId)
+            GameManager.Boards[_id].DeactivateBoard();
+
+        //TEMP
+        if (_gameOver)
+        {
+            Client.Instance.Tcp.Disconnect();
+        }
+
+        //Start timer
+    }
+
+    public static void ReceiveMessage(Packet _packet)
+    {
+        float _time = _packet.ReadFloat();
+        string _message = _packet.ReadString();
+
+        Message.Instance.DisplayAMessage(_time, _message);
     }
 }

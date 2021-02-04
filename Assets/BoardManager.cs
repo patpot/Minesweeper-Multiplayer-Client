@@ -44,12 +44,26 @@ public class BoardManager : MonoBehaviour
 
     public void ActivateBoard()
     {
+        GameStarted = true;
         for (int x = 0; x < Tiles.GetLength(0); x++)
         {
             for (int y = 0; y < Tiles.GetLength(1); y++)
             {
                 GameObject _tile = Tiles[x, y];
                 _tile.GetComponent<Button>().enabled = true;
+            }
+        }
+    }
+
+    public void DeactivateBoard()
+    {
+        GameStarted = false;
+        for (int x = 0; x < Tiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < Tiles.GetLength(1); y++)
+            {
+                GameObject _tile = Tiles[x, y];
+                _tile.GetComponent<Button>().enabled = false;
             }
         }
     }
