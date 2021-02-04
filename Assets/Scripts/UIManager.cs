@@ -25,6 +25,11 @@ public class UIManager : MonoBehaviour
 
     public void ConnectToServer()
     {
+        if (UsernameField.text.Length > 12)
+        {
+            MessageManager.Instance.DisplayAMessage(3f, "Usernames must be 12 characters or less!");
+            return;
+        }
         StartMenu.SetActive(false);
         UsernameField.interactable = false;
         Client.Instance.ConnectToServer();

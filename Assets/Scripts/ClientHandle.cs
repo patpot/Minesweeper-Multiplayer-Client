@@ -99,6 +99,6 @@ public class ClientHandle : MonoBehaviour
         float _time = _packet.ReadFloat();
         string _message = _packet.ReadString();
 
-        Message.Instance.DisplayAMessage(_time, _message);
+        MessageManager.Instance.DisplayAMessage(_time, _message);
     }
 }

@@ -193,7 +193,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.SEND_REVEAL_TILE, ClientHandle.RevealTile },
             { (int)ServerPackets.SEND_FLAG, ClientHandle.ReceiveFlag },
             { (int)ServerPackets.CLIENT_DISCONNECT, ClientHandle.ReceiveDisconnect },
-            { (int)ServerPackets.PLAYER_HIT_MINE, ClientHandle.PlayerHitMine }
+            { (int)ServerPackets.PLAYER_HIT_MINE, ClientHandle.PlayerHitMine },
+            { (int)ServerPackets.SEND_MESSAGE, ClientHandle.ReceiveMessage }
         };
         Debug.Log("Initialized packets.");
     }
