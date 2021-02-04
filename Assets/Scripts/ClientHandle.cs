@@ -31,6 +31,9 @@ public class ClientHandle : MonoBehaviour
     public static void StartGame(Packet _packet)
     {
         GameManager.Instance.StartGame();
+        int _id = _packet.ReadInt();
+        if (_id == Client.Instance.MyId)
+            GameManager.Boards[_id].ActivateBoard();
     }
 
     public static void RevealTile(Packet _packet)

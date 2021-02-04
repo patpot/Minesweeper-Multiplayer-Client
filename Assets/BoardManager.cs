@@ -10,7 +10,7 @@ public class BoardManager : MonoBehaviour
     public int Id;
     public string Username;
 
-    public bool GameStarted = false;
+    public bool GameStarted;
     public Transform TileParent;
     public GameObject TilePrefab;
     public GameObject[,] Tiles;
@@ -25,6 +25,7 @@ public class BoardManager : MonoBehaviour
             {
                 GameObject _tile = Instantiate(TilePrefab);
                 _tile.transform.SetParent(TileParent, false);
+                _tile.GetComponent<Button>().enabled = false;
                 Tiles[x, y] = _tile;
                 if (_localBoard)
                 {
@@ -36,10 +37,19 @@ public class BoardManager : MonoBehaviour
                     });
                     _tile.GetComponent<SetFlag>().X = localX;
                     _tile.GetComponent<SetFlag>().Y = localY;
-
                 }
-                else
-                    _tile.GetComponent<Button>().enabled = false;
+            }
+        }
+    }
+
+    public void ActivateBoard()
+    {
+        for (int x = 0; x < Tiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < Tiles.GetLength(1); y++)
+            {
+                GameObject _tile = Tiles[x, y];
+                _tile.GetComponent<Button>().enabled = true;
             }
         }
     }
