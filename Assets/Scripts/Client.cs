@@ -11,7 +11,7 @@ public class Client : MonoBehaviour
     public static Client Instance;
     public static int DataBufferSize = 4096;
 
-    public string Ip = "127.0.0.1";
+    public string Ip = "51.132.34.221";
     public int Port = 26950;
     public int MyId = 0;
     public TCP Tcp;
