@@ -85,7 +85,8 @@ public class ClientHandle : MonoBehaviour
         if (_id == Client.Instance.MyId && _numLives == 0)
             GameManager.Boards[_id].DeactivateBoard();
 
-        GameManager.Boards[_id].SetLives(_numLives);
+        if(_id == Client.Instance.MyId)
+            GameManager.Boards[_id].SetLives(_numLives);
         //Start timer
     }
 
