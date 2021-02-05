@@ -10,10 +10,10 @@ public class BoardManager : MonoBehaviour
     public int Id;
     public string Username;
 
-    public bool GameStarted;
     public Transform TileParent;
     public GameObject TilePrefab;
     public GameObject[,] Tiles;
+    public Button LockInButton;
     public Text FlagNumber;
     public void FillBoard(int boardX, int boardY, bool _localBoard)
     {
@@ -44,7 +44,6 @@ public class BoardManager : MonoBehaviour
 
     public void ActivateBoard()
     {
-        GameStarted = true;
         for (int x = 0; x < Tiles.GetLength(0); x++)
         {
             for (int y = 0; y < Tiles.GetLength(1); y++)
@@ -57,7 +56,7 @@ public class BoardManager : MonoBehaviour
 
     public void DeactivateBoard()
     {
-        GameStarted = false;
+        LockInButton.enabled = false;
         for (int x = 0; x < Tiles.GetLength(0); x++)
         {
             for (int y = 0; y < Tiles.GetLength(1); y++)
@@ -88,6 +87,13 @@ public class BoardManager : MonoBehaviour
         else
             Tiles[x, y].GetComponent<Button>().GetComponentInChildren<Text>().text = "?";
     }
+
+    public void LockIn()
+    {
+        DeactivateBoard();
+        ClientSend.LockIn();
+    }
+
     public enum TileType
     {
         Unrevealed,

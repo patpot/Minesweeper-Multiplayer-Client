@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1377749091125951257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1080, y: -540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 1377749091125951243}
   - {fileID: 8348791896234477571}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Username: 
-  GameStarted: 0
   TileParent: {fileID: 1377749091125951246}
   TilePrefab: {fileID: 628801243046341636, guid: 31b4d4bcf39dc714c99722d061d2357b, type: 3}
+  LockInButton: {fileID: 0}
   FlagNumber: {fileID: 8348791895283398274}
 --- !u!1 &1377749091125951258
 GameObject:
@@ -148,10 +148,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 60, y: 60}
+  m_CellSize: {x: 30, y: 30}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
-  m_ConstraintCount: 10
+  m_ConstraintCount: 20
 --- !u!1 &1377749091125951261
 GameObject:
   m_ObjectHideFlags: 0

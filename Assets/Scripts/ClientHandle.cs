@@ -80,16 +80,9 @@ public class ClientHandle : MonoBehaviour
     public static void PlayerHitMine(Packet _packet)
     {
         int _id = _packet.ReadInt();
-        bool _gameOver = _packet.ReadBool();
 
         if (_id == Client.Instance.MyId)
             GameManager.Boards[_id].DeactivateBoard();
-
-        //TEMP
-        if (_gameOver)
-        {
-            Client.Instance.Tcp.Disconnect();
-        }
 
         //Start timer
     }
@@ -100,5 +93,14 @@ public class ClientHandle : MonoBehaviour
         string _message = _packet.ReadString();
 
         MessageManager.Instance.DisplayAMessage(_time, _message);
+    }
+
+    public static void ReceiveEndGame(Packet _packet)
+    {
+        int _player1CorrectFlags = _packet.ReadInt();
+        int _player2CorrectFlags = _packet.ReadInt();
+
+        UIManager.Instance.DisplayEndScreen(_player1CorrectFlags, _player2CorrectFlags);
+        Client.Instance.Tcp.Disconnect(false);
     }
 }

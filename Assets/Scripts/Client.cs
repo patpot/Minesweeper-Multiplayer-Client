@@ -166,8 +166,10 @@ public class Client : MonoBehaviour
             return false;
         }
 
-        public void Disconnect()
+        public void Disconnect(bool _return = true)
         {
+            //temp
+            if (_stream == null) return;
             //Handles necessary server disconnection
             Instance._disconnect();
 
@@ -179,7 +181,8 @@ public class Client : MonoBehaviour
             foreach (var board in GameManager.Boards)
                 Destroy(board.Value.gameObject);
             GameManager.Boards.Clear();
-            UIManager.Instance.ReturnToMenu();
+            if (_return)
+                UIManager.Instance.ReturnToMenu();
         }
     }
 
@@ -194,7 +197,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.SEND_FLAG, ClientHandle.ReceiveFlag },
             { (int)ServerPackets.CLIENT_DISCONNECT, ClientHandle.ReceiveDisconnect },
             { (int)ServerPackets.PLAYER_HIT_MINE, ClientHandle.PlayerHitMine },
-            { (int)ServerPackets.SEND_MESSAGE, ClientHandle.ReceiveMessage }
+            { (int)ServerPackets.SEND_MESSAGE, ClientHandle.ReceiveMessage },
+            { (int)ServerPackets.GAME_END, ClientHandle.ReceiveEndGame }
         };
         Debug.Log("Initialized packets.");
     }
