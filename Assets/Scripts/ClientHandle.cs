@@ -80,10 +80,12 @@ public class ClientHandle : MonoBehaviour
     public static void PlayerHitMine(Packet _packet)
     {
         int _id = _packet.ReadInt();
+        int _numLives = _packet.ReadInt(); ;
 
-        if (_id == Client.Instance.MyId)
+        if (_id == Client.Instance.MyId && _numLives == 0)
             GameManager.Boards[_id].DeactivateBoard();
 
+        GameManager.Boards[_id].SetLives(_numLives);
         //Start timer
     }
 

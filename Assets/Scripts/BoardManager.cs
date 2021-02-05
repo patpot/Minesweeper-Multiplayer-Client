@@ -13,6 +13,7 @@ public class BoardManager : MonoBehaviour
     public Transform TileParent;
     public GameObject TilePrefab;
     public GameObject[,] Tiles;
+    public GameObject[] Lives;
     public Button LockInButton;
     public Text FlagNumber;
     public void FillBoard(int boardX, int boardY, bool _localBoard)
@@ -67,15 +68,24 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    public void SetLives(int lives)
+    {
+        for (int i = 0; i < lives; i++)
+            Lives[i].SetActive(true);
+
+        for (int j = lives; j < Lives.Length; j++)
+            Lives[j].SetActive(false);
+    }
+
     public void RevealTile(int x, int y, TileType tileType, int numMines)
     {
         switch (tileType)
         {
             case TileType.Revealed:
-                Tiles[x, y].GetComponent<Button>().GetComponentInChildren<Text>().text = numMines.ToString();
+                Tiles[x, y].GetComponent<Image>().sprite = GameManager.Instance.Mines[numMines];
                 break;
             case TileType.Unrevealed:
-                Tiles[x, y].GetComponent<Button>().GetComponentInChildren<Text>().text = "?";
+                Tiles[x, y].GetComponent<Image>().sprite = GameManager.Instance.Flag;
                 break;
         }
     }
@@ -83,9 +93,9 @@ public class BoardManager : MonoBehaviour
     public void SetFlag(int x, int y, TileType tileType)
     {
         if(tileType == TileType.Flag)
-            Tiles[x, y].GetComponent<Button>().GetComponentInChildren<Text>().text = "FLAG";
+            Tiles[x, y].GetComponent<Image>().sprite = GameManager.Instance.Flag;
         else
-            Tiles[x, y].GetComponent<Button>().GetComponentInChildren<Text>().text = "?";
+            Tiles[x, y].GetComponent<Image>().sprite = GameManager.Instance.BlankTile;
     }
 
     public void LockIn()

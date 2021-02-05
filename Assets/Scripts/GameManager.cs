@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public Sprite[] Mines;
+    public Sprite Flag;
+    public Sprite BlankTile;
 
     public static Dictionary<int, BoardManager> Boards = new Dictionary<int, BoardManager>();
 

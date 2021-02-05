@@ -953,6 +953,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e41df2ef602dd4296e75e7686b6dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mines:
+  - {fileID: 21300000, guid: 05ad0643ddb2ed5478993994abeed41b, type: 3}
+  - {fileID: 21300000, guid: 1749d90acc15d4b58b57c0d29723c7a5, type: 3}
+  - {fileID: 21300000, guid: 8086df93b9754424daec5fcb1235b709, type: 3}
+  - {fileID: 21300000, guid: f846244cdcf75447d92b05e654704c33, type: 3}
+  - {fileID: 21300000, guid: bed2abe2a5edd4719862953973f93c74, type: 3}
+  - {fileID: 21300000, guid: 254d10152fd664efe9287226bde71747, type: 3}
+  - {fileID: 21300000, guid: 0bfd3d030af144e57aa21e41d3aec596, type: 3}
+  - {fileID: 21300000, guid: 138d15b5c197946fd903217eac41752d, type: 3}
+  - {fileID: 21300000, guid: 34ec5f04031274d4ba3c73e1539a8a49, type: 3}
+  - {fileID: 21300000, guid: 2edca480964b3411481954e33f77a3a4, type: 3}
+  Flag: {fileID: 21300000, guid: 9ea88046d502dc6469faa938683aca57, type: 3}
+  BlankTile: {fileID: 21300000, guid: 868ff1d7a9462cc42b298ce094590dbb, type: 3}
   MainCanvas: {fileID: 848864563}
   LocalBoardPrefab: {fileID: 8860203534445792208, guid: 34c1ebf13cb934947b13f02e817a2eaa, type: 3}
   Player1Board: {x: -1650, y: -700, z: 0}
