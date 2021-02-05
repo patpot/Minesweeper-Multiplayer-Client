@@ -70,11 +70,15 @@ public class BoardManager : MonoBehaviour
 
     public void SetLives(int lives)
     {
-        for (int i = 0; i < lives; i++)
-            Lives[i].SetActive(true);
-
-        for (int j = lives; j < Lives.Length; j++)
-            Lives[j].SetActive(false);
+        int counter = 0;
+        foreach (var life in Lives)
+        {
+            if (counter < lives)
+                life.SetActive(true);
+            else
+                life.SetActive(false);
+            counter++;
+        }
     }
 
     public void RevealTile(int x, int y, TileType tileType, int numMines)
